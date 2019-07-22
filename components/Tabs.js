@@ -8,7 +8,6 @@ export default class TabsAdvancedExample extends React.Component {
   render() {
     return (
       <Container>
-        <Header hasTabs/>
         <Tabs>
           <Tab heading={ <TabHeading><Icon name="camera" /><Text>Camera</Text></TabHeading>}>
             {/* <Tab1 /> */}

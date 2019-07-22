@@ -14,7 +14,6 @@ import {
   List,
   Badge, Accordion, Left, Body, } from 'native-base';
 import SearchField from '../components/SearchField';
-import { Navigation } from 'react-navigation';
 const matches = [
   {
     fixtureId: 1,
@@ -150,7 +149,7 @@ _renderContent(item) {
           <ListItem key = {item.fixtureId}>
             <TouchableOpacity
                 style={styles.content}
-                
+                onPress={() => this.props.navigation.navigate('Game')}
                 >
               <Left style={{ flexDirection: "column", }}>
                 <Text style={styles.teams}>{item.homeTeam}*</Text>
@@ -180,7 +179,7 @@ render() {
           animation={true}
           expanded={true}
           renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
+          renderContent={() => this._renderContent()}
         />
       </Content>
     </Container>
