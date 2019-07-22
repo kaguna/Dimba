@@ -6,6 +6,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import NewsScreen from '../screens/NewsScreen';
 import MatchesScreen from '../screens/MatchesScreen';
+import GameDetails from '../screens/GameScreen';
+
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
@@ -69,8 +71,15 @@ const tabNavigator = createBottomTabNavigator({
   MatchesStack,
 });
 
+const topTabNavigator = createBottomTabNavigator({
+  GameDetailsScreen: GameDetails
+})
+const MainScreenNavigator = createStackNavigator ({
+  tabNavigatorScreen: tabNavigator,
+  // GameDetails: topTabNavigator
+})
 tabNavigator.path = '';
 
 
 
-export default tabNavigator;
+export default MainScreenNavigator;

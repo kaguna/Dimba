@@ -1,10 +1,18 @@
 import React from 'react';
-import TabsAdvancedExample from '../components/Tabs'
+import GameDetails from '../components/GameDetails'
+import BackButton from '../components/BackButton'
+import { View, Button, Icon } from 'native-base';
 
 export default class GameScreen extends React.Component {
   render() {
     return (
-      <TabsAdvancedExample/>
+      <View>
+        <GameDetails/>
+      </View>
     );
   }
 }
+
+GameScreen.navigationOptions = {
+  header: <BackButton />,
+};
