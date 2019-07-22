@@ -5,12 +5,12 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import AppNavigator from './navigation/AppNavigator';
+import RootNavigator from './navigation';
 import { createAppContainer } from "react-navigation";
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  const AppContainer = createAppContainer(AppNavigator);
+  const AppContainer = createAppContainer(RootNavigator);
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
@@ -45,7 +45,7 @@ async function loadResourcesAsync() {
   ]);
 }
 
-function handleLoadingError(error: Error) {
+function handleLoadingError(error) {
   // In this case, you might want to report the error to your error reporting
   // service, for example Sentry
   console.warn(error);
