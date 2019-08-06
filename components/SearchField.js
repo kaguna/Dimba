@@ -5,7 +5,6 @@ export default class SearchBar extends React.Component {
     return (
       <Item>
         <Input placeholder="Search League" />
-        <Icon name="ios-search" />
       </Item>
     );
   }

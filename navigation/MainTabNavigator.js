@@ -20,9 +20,9 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'All Matches',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-football' : 'md-football'} />
-  ),
+  // tabBarIcon: ({ focused }) => (
+  //   <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-football' : 'md-football'} />
+  // ),
 };
 
 HomeStack.path = '';
@@ -36,13 +36,13 @@ const NewsStack = createStackNavigator(
 
 NewsStack.navigationOptions = {
   tabBarLabel: 'News',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios'? 'ios-today' : 'md-today'
-      }
-    />
-  ),
+  // tabBarIcon: ({ focused }) => (
+  //   <TabBarIcon
+  //     focused={focused}
+  //     name={Platform.OS === 'ios'? 'ios-today' : 'md-today'
+  //     }
+  //   />
+  // ),
 };
 
 NewsStack.path = '';
@@ -56,9 +56,9 @@ const MatchesStack = createStackNavigator(
 
 MatchesStack.navigationOptions = {
   tabBarLabel: 'Standings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-trophy' : 'md-trophy'} />
-  ),
+  // tabBarIcon: ({ focused }) => (
+  //   <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-trophy' : 'md-trophy'} />
+  // ),
 };
 
 MatchesStack.path = '';

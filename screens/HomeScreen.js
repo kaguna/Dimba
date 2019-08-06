@@ -14,101 +14,21 @@ import {
   List,
   Badge, Accordion, Left, Body, } from 'native-base';
 import SearchField from '../components/SearchField';
-const matches = [
-  {
-    fixtureId: 1,
-    homeTeam: 'Chelsea', 
-    awayTeam: 'Manchester United',
-    time: '6:00pm',
-  }, 
-  {
-    fixtureId: 2,
-    homeTeam: 'Watford',
-    awayTeam: 'Leicester',
-    time: '6:00pm',
-  }, 
-  {
-    fixtureId: 3,
-    homeTeam: 'Watford',
-    awayTeam: 'Leicester',
-    time: '6:00pm',
-  }, 
-  {
-    fixtureId: 4,
-    homeTeam: 'Watford',
-    awayTeam: 'Leicester',
-    time: '6:00pm',
-  }, 
-  {
-    fixtureId: 5,
-    homeTeam: 'Watford',
-    awayTeam: 'Leicester',
-    time: '6:00pm',
-  }, 
-  {
-    fixtureId: 6,
-    homeTeam: 'Watford',
-    awayTeam: 'Leicester',
-    time: '6:00pm',
-  }
-];
+import PickDate from '../components/PickDate';
+import Moment from 'moment';
+import { data } from '../data';
 
 const dataArray = [
-       {
-          id: 0,
-          name: 'English Premier League',
-          liveGames: 12,
-       },
-       {
-          id: 1,
-          name: 'DFB Pokal',
-          liveGames: 10,
-       },
-       {
-          id: 2,
-          name: 'Asian Cup',
-          liveGames: 0,
-       },
-       {
-          id: 3,
-          name: 'Copa del Rey',
-          liveGames: 13,
-       },
-       {
-          id: 4,
-          name: 'Coppa Italia',
-          liveGames: 0,
-       },
-       {
-          id: 5,
-          name: 'Serie A',
-          liveGames: 8,
-       },
-       {
-          id: 6,
-          name: 'African Cup',
-          liveGames: 3,
-       },
-       {
-          id: 7,
-          name: 'UEFA',
-          liveGames: 0,
-       },
-       {
-          id: 8,
-          name: 'Carabao Cup',
-          liveGames: 4,
-       },
-       {
-          id: 9,
-          name: 'Laliga',
-          liveGames: 12,
-       },
-       {
-          id: 10,
-          name: 'Bundesliga',
-          liveGames: 0,
-       }
+      {
+        id: 0,
+        name: 'English Premier League',
+        liveGames: 12,
+      },
+      {
+        id: 1,
+        name: 'DFB Pokal',
+        liveGames: 10,
+      },
     ];
 
 
@@ -121,7 +41,7 @@ alertItemName = (item) => {
 _renderHeader(item, expanded) {
   return (
     <View style={styles.leagues}>
-       {/* {expanded
+      {/* {expanded
         ? <Icon style={{ fontSize: 20 }} name="arrow-up" />
         : <Icon style={{ fontSize: 20 }} name="arrow-down" />} */}
       
@@ -130,13 +50,11 @@ _renderHeader(item, expanded) {
         </Text>
 
       <Right>
-        {item.liveGames == 0 ? (show =<Text></Text>) : (show =
         <View style = {styles.badge}>
           <Badge>
-            <Text style = {styles.games}>{item.liveGames}</Text>
+            <Text style = {styles.games}>{data.season_fixtures[1].fixtures.length}</Text>
           </Badge>
         </View>
-        )}
       </Right>
     </View>
   );
@@ -145,21 +63,23 @@ _renderContent(item) {
   return (
     <List style={styles.divider}>
       {
-        matches.map((item, index) => (
-          <ListItem key = {item.fixtureId}>
+        data.season_fixtures[1].fixtures.map((item, index) => (
+          <ListItem key = {item.id}>
             <TouchableOpacity
                 style={styles.content}
-                onPress={() => this.props.navigation.navigate('Game')}
+                onPress={() => this.props.navigation.navigate('Game',
+                { match:item }
+                )}
                 >
-              <Left style={{ flexDirection: "column", }}>
-                <Text style={styles.teams}>{item.homeTeam}*</Text>
-                <Text note>{item.awayTeam}</Text>
+              <Left style={styles.flexDirectionRow}>
+                <Text style={homeTeamWon(item) ? styles.homeTeam : ""}>{item.home_team}</Text>
+                <Text style={awayTeamWon(item) ? styles.awayTeam : ""}>{item.away_team}</Text>
               </Left>
 
               <Right>
-              <Text style={styles.teams}>4</Text>
-              <Text note>2</Text>
-                {/* <Text note>{item.time}</Text> */}
+              <Text style={homeTeamWon(item) ? styles.homeTeam : ""} >{item.home_team_goals}</Text>
+              <Text style={awayTeamWon(item) ? styles.awayTeam : ""}>{item.away_team_goals}</Text>
+                {/* <Text note>{Moment(item.local_time).format(' hh:mm:ss a')}</Text> */}
               </Right>
               
             </TouchableOpacity>
@@ -170,6 +90,15 @@ _renderContent(item) {
   );
 }
 render() {
+
+  homeTeamWon = (item) => {
+    return item.home_team_goals > item.away_team_goals
+  };
+
+  awayTeamWon = (item) => {
+    return item.away_team_goals > item.home_team_goals
+  };
+
   return (
     <Container>
       <SearchField/>
@@ -188,7 +117,7 @@ render() {
 }
 
 MatchesScreen.navigationOptions = {
-  title: 'Matches',
+  header: <PickDate />,
 };
 
 const styles = StyleSheet.create({
@@ -202,8 +131,12 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
   },
-  teams: {
+  homeTeam: {
     paddingBottom: 10,
+    fontWeight: 'bold',
+  },
+  awayTeam: {
+    paddingTop: 10,
     fontWeight: 'bold',
   },
   content: {
@@ -217,4 +150,8 @@ const styles = StyleSheet.create({
     color: '#ffff',
     fontWeight: 'bold',
   },
+
+  flexDirectionRow: {
+    flexDirection: "column"
+  }
 });

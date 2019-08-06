@@ -9,65 +9,6 @@ import {
 import { Badge } from 'native-base';
 
 export default class HomeScreen extends React.Component {
-  leagues = {
-    names: [
-       {
-          id: 0,
-          name: 'English Premier League',
-          liveGames: 12,
-       },
-       {
-          id: 1,
-          name: 'DFB Pokal',
-          liveGames: 10,
-       },
-       {
-          id: 2,
-          name: 'Asian Cup',
-          liveGames: 0,
-       },
-       {
-          id: 3,
-          name: 'Copa del Rey',
-          liveGames: 13,
-       },
-       {
-          id: 4,
-          name: 'Coppa Italia',
-          liveGames: 0,
-       },
-       {
-          id: 5,
-          name: 'Serie A',
-          liveGames: 8,
-       },
-       {
-          id: 6,
-          name: 'African Cup',
-          liveGames: 3,
-       },
-       {
-          id: 7,
-          name: 'UEFA',
-          liveGames: 0,
-       },
-       {
-          id: 8,
-          name: 'Carabao Cup',
-          liveGames: 4,
-       },
-       {
-          id: 9,
-          name: 'Laliga',
-          liveGames: 12,
-       },
-       {
-          id: 10,
-          name: 'Bundesliga',
-          liveGames: 0,
-       }
-    ]
- }
 
 alertItemName = (item) => {
   alert(item.name)
@@ -142,12 +83,12 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 4,
     backgroundColor: '#EEEEEE',
- },
- text: {
+},
+text: {
     color: '#363D4E',
     fontSize: 20,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
- }
+}
 });
