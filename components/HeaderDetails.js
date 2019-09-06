@@ -5,23 +5,24 @@ import { View, Title, Left, Right, Button,Text, Icon, Body } from 'native-base';
 
 class HeaderDetails extends React.Component {
     render() {
+        const {title, screen} = this.props;
         return (
             <SafeAreaView style={ styles.headerColor}>
                 <View style={{ flexDirection: 'row'}}>
                     <Left>
                         <Button
                         transparent
-                        onPress ={() => this.props.navigation.navigate('Home')}
+                        onPress ={() => this.props.navigation.navigate(screen)}
                         >
                             {/* <Icon name='ios-arrow-back' /> */}
                         <Text>Back</Text>
+                        <Title style={ styles.title}>{title}</Title>
                         </Button>
                     </Left>
 
-                    <Body>
-                        <Title style={ styles.title}>Match</Title>
-                    </Body>
-                    <Right/>
+                    {/* <Body>
+                        <Title style={ styles.title}>{title}</Title>
+                    </Body> */}
                 </View>
             </SafeAreaView>
         );
@@ -36,6 +37,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     title: {
-        color: '#ffff'
+        color: '#ffff',
+        marginLeft: 30,
+        
     }
 });

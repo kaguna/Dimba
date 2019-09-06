@@ -6,7 +6,7 @@ import Commentary from './Commentary';
 import Standings from './Standings';
 export default class GameDetails extends React.Component {
   render() {
-    const {match} = this.props;
+    const {navigation, match} = this.props;
     return (
       <Container>
         <Tabs>
@@ -14,7 +14,9 @@ export default class GameDetails extends React.Component {
             <Commentary  match={match}/>
           </Tab>
           <Tab heading={ <TabHeading><Text>Standings</Text></TabHeading>}>
-            <Standings />
+            <Standings 
+              navigation={navigation}
+            />
           </Tab>
           <Tab heading={ <TabHeading><Text>LineUp</Text></TabHeading>}>
             <LineUps />

@@ -23,6 +23,7 @@ HomeStack.navigationOptions = {
   // tabBarIcon: ({ focused }) => (
   //   <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-football' : 'md-football'} />
   // ),
+  
 };
 
 HomeStack.path = '';

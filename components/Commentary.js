@@ -1,56 +1,53 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
-import { Separator, List, ListItem, Left, Body, Right, Text, View } from 'native-base';
+import { Badge, List, ListItem, Text, View } from 'native-base';
 
 export default class Commentary extends React.Component {
+    checkEventType = (eventId) => {
+        switch(eventId) {
+            case 1:
+                return { success: true }
+                break;
+            case 2:
+                return { warning: true }
+                break;
+        
+            case 3:
+                return { danger: true } 
+                break;
 
-render() {
-    const {match} = this.props;
-    return (
-        <View style={styles.list}>
-            <Left>
-                {match.home_team_scorers.map((event, index) =>
-                    <Text key = {index} style={styles.names}>{event}</Text> 
-                )}
-            </Left>
-                
-            <Right>
-                {match.away_team_scorers.map((event, index) =>
-                    <Text key = {index} style={styles.names}>{event}</Text> 
-                )}
-            </Right>
-        </View>
-    );
-}
+            default:
+                return { info: true }
+        }
+    }
+
+
+
+    render() {
+        const {commentaries} = this.props.match.match;
+        return (
+            <View style={styles.list}>
+                <List>
+                    {
+                        commentaries.map((commentary, index) =>
+                            <ListItem key={index}>
+                                <Badge {...this.checkEventType(commentary.event[0])}>
+                                    <Text>{commentary.commentary_time}'</Text>
+                                </Badge>
+                                <Text> {commentary.event[1]} for </Text>
+                                <Text style={styles.team}>{commentary.team} </Text>
+                                <Text> ({commentary.player}) </Text>
+                                <Text>({commentary.description})</Text>
+                            </ListItem> 
+                    )}
+                </List>
+            </View>
+        );
+    }
 }
 const styles = StyleSheet.create({
-    list: {
-        flexDirection: 'row',
-        padding: 20,
-    },
-    names: {
-        paddingBottom: 20,
-    },
-    dash: {
-        fontSize: 26,
-    },
-    dateText: {
-        fontSize: 10,
-    },
-    details: {
-        paddingTop: 10,
-    },
-    goals: {
-        flexDirection: 'row',
-    },
-    live: {
-        color: 'red',
-        fontSize: 34,
-        fontWeight: 'bold',
-    },
-    time: {
-        color: 'red',
-        fontSize: 10,
+    team: {
+        fontWeight: 'bold'
     }
 });

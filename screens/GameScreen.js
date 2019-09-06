@@ -6,22 +6,24 @@ import HeaderDetails from '../components/HeaderDetails'
 import MatchTeams from '../components/MatchTeams'
 
 export default class GameScreen extends React.Component {
+  static navigationOptions = () => {
+    return {
+      header: <HeaderDetails title='Matches' screen='Fixtures' />,
+    }
+};
 
   render() {
-    const match = this.props.navigation.dangerouslyGetParent().getParam('match');
+    const { game } = this.props.navigation.state.params
     return (
       <ScrollView>
         <MatchTeams
-          match={match}
+          team={game}
         />
         <GameDetails
-          match={match}
+          match={game}
+          navigation={this.props.navigation}
         />
       </ScrollView>
     );
   }
 }
-
-GameScreen.navigationOptions = {
-  header: <HeaderDetails />,
-};

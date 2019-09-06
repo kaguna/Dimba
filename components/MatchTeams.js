@@ -6,33 +6,38 @@ import { Left, Body, Right,Thumbnail, Text, View } from 'native-base';
 export default class MatchTeams extends React.Component {
 
 render() {
-    const {match} = this.props;
+    const {team} = this.props;
 return (
     <View style={styles.teams}>
         <Left>
-            <Thumbnail square source={{uri: 'http://wcobhojpur.gov.np/default_images/default-logo.png'}} />
-            <Text style={styles.details}>{match.home_team}</Text>
+            <View style={styles.infoColumn}>
+                <Thumbnail square source={{uri: 'http://wcobhojpur.gov.np/default_images/default-logo.png'}} />
+                <Text style={styles.details}>{team.match.home_team[1]}</Text>
+            </View>
         </Left>
 
-        <View style={styles.dates}>
-            <Text style={styles.dateText}>{match.date+" "+match.local_time}</Text>
-            {/* <Body>
-                <Text style={styles.verses}> VS </Text>
-            </Body> */}
+        <View style={styles.infoColumn}>
+            <Text style={styles.dateText}>{team.match.match_day}</Text>
+            {team.match.results.length == 0 ?
+                <Body>
+                    <Text style={styles.verses}> VS </Text>
+                </Body> :
 
-            <Body>
-                <View style={styles.goals}>
-                    <Text style={styles.live}>{match.home_team_goals}</Text>
-                    <Text style={styles.live}> - </Text>
-                    <Text style={styles.live}> {match.away_team_goals}</Text>
-                </View>
-                <Text style={styles.time}> Full Time </Text>
-            </Body>
-        </View>
-            
+                <Body>
+                    <View style={styles.goals}>
+                        <Text style={styles.live}>{team.match.results.home_team.goals_for}</Text>
+                        <Text style={styles.live}> - </Text>
+                        <Text style={styles.live}> {team.match.results.away_team.goals_for}</Text>
+                    </View>
+                    <Text style={styles.time}> Full Time </Text>
+                </Body>
+            }
+            </View>
         <Right>
-            <Thumbnail square source={{uri:'http://wcobhojpur.gov.np/default_images/default-logo.png'}} />
-            <Text style={styles.details}>{match.away_team}</Text>
+            <View style={styles.infoColumn}>
+                <Thumbnail square source={{uri:'http://wcobhojpur.gov.np/default_images/default-logo.png'}} />
+                <Text style={styles.details}>{team.match.away_team[1]}</Text>
+            </View>
         </Right>
     </View>
 );
@@ -40,11 +45,11 @@ return (
 }
 const styles = StyleSheet.create({
     teams: {
-    flexDirection: 'row',
-    padding: 20,
+        flexDirection: 'row',
+        padding: 10,
     },
-    dates: {
-    flexDirection: 'column',
+    infoColumn: {
+        flexDirection: 'column',
     },
     verses: {
         fontSize: 24,
