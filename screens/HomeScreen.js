@@ -150,7 +150,7 @@ _renderContent(item) {
           <ListItem key = {item.fixtureId}>
             <TouchableOpacity
                 style={styles.content}
-                
+                onPress={() => this.props.navigation.navigate('GameDetailsScreen')}
                 >
               <Left style={{ flexDirection: "column", }}>
                 <Text style={styles.teams}>{item.homeTeam}*</Text>
@@ -180,7 +180,7 @@ render() {
           animation={true}
           expanded={true}
           renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
+          renderContent={() => this._renderContent()}
         />
       </Content>
     </Container>
